@@ -1,0 +1,2 @@
+Automatic Excel reports are written here after successful save/edit/login/logout.
+Keep this folder outside public_html. Database records themselves are in Hostinger MySQL.

@@ -1,0 +1,44 @@
+MMI HOSTINGER PHP/MYSQL — TEST REPORT
+02 November 2026
+===================================
+Test environment: isolated local PHP 8.3, MariaDB 10.11 and real headless Chromium.
+No live Hostinger account/domain or client data was accessed. Hostinger deployment
+requires your own database credentials, SSL, uploads and final installation check.
+
+15 integration tests PASS (zero failures, zero skipped with browser testing enabled):
+1. Protected first setup, login, receptionist permissions and account disabling.
+2. Visitor IN/OUT, safe duplicate retry, one-open-visit rule, digit-prefix matching.
+3. Profile/visit corrections, preserved snapshots/times, responsible staff and history.
+4. Callback saving, +92/03 matching, editing, version conflict and before/after log.
+5. Both Excel workbooks opened by independent XLSX reader; SQL dump restored and
+   restored visit/call counts matched source.
+6. Anonymous/hostile host/origin access rejected; printed user values escaped.
+7. PHP AND MariaDB processes stopped/restarted: records AND active valid session persist.
+8. 505 calls: complete pagination, full filtered CSV/print, no latest-500 cutoff.
+9. Password reset revokes staff session; repeated invalid login requests throttled.
+10. Real Chromium: existing-admin sign-in, LIVE, visitor IN/OUT, 0-prefix autofill,
+    repeat visit, print, callback timer/save/edit/search/CSV, staff account/login,
+    mobile-width check and no JavaScript errors.
+11. Real Chromium: FIRST admin setup with installation key and preflight page.
+12. Desktop SQLite-to-MySQL record migration imported; lookup/repeat visit work.
+13. Twelve parallel PHP writers with one request token produced exactly ONE visit.
+14. Simulated unavailable Excel directory: primary MySQL entry stayed committed,
+    backup_warning returned, and later Excel download still worked.
+15. Missing request header/invalid values rejected; SQL-injection-shaped search
+    remained a normal bound query and returned no unintended records.
+
+Additional verification:
+- All PHP files passed PHP syntax lint; JavaScript passed Node syntax check.
+- UI retained professional MMI branding and developer footer.
+- Desktop/mobile PHP edition screenshots reviewed internally.
+- Final ZIP CRC/file checks and extracted-folder regression run performed.
+- No real config.php, database credentials, test database or test Excel files shipped.
+- Test/development runtimes are not production dependencies; app is PHP + MySQL only.
+
+BOUNDARIES
+Live Hostinger Apache/LiteSpeed .htaccess, SSL routing, actual database-user rights,
+file-owner permissions and account resource limits cannot be confirmed without a live
+installation. Use install.php and START_HERE_HOSTINGER.txt on your actual account.
+No penetration-audit or universal zero-bug/security guarantee is claimed.
+Desktop accounts/passwords are not auto-imported; recreate website staff accounts.
+Database/Excel backups are not encrypted by the app. Protect hosting credentials/files.

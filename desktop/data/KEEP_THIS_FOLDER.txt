@@ -1,0 +1,1 @@
+MMI creates mmi.sqlite3 here automatically. Keep this folder safe.

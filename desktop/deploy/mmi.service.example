@@ -1,0 +1,23 @@
+[Unit]
+Description=MMI Reception Desk
+After=network.target
+
+[Service]
+Type=simple
+User=mmi
+Group=mmi
+WorkingDirectory=/opt/mmi
+Environment=MMI_DATA_DIR=/var/lib/mmi
+Environment=MMI_PUBLIC_ORIGIN=https://mmi.example.com
+ExecStart=/opt/mmi/.venv/bin/python /opt/mmi/start_site.py
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/mmi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+# Replace mmi.example.com with the actual domain; DNS must point to your server.
+# The application and Caddy run on the same machine. Backend port is loopback-only.
+mmi.example.com {
+    encode gzip
+    reverse_proxy 127.0.0.1:8765
+}

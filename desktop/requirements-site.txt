@@ -1,0 +1,2 @@
+# Only required for website hosting. Local desktop app needs no extra packages.
+waitress>=3.0.2,<4

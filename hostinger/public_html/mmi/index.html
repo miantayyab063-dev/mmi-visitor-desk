@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>MMI · Reception Workspace</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <aside id="appSidebar" class="sidebar" hidden>
+      <a class="brand" href="/" aria-label="MMI home"
+        ><span class="brand-symbol">M<span>MI</span></span
+        ><span class="brand-caption"
+          >MASTERMIND MARKETING<br />INTERNATIONAL</span
+        ></a
+      >
+      <div class="nav-caption">WORKSPACE</div>
+      <nav aria-label="Main navigation">
+        <button id="tabVisitors" class="nav-item active" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">01</span
+          ><span>Visitor desk<small>Arrivals &amp; departures</small></span>
+        </button>
+        <button id="tabCalls" class="nav-item">
+          <span class="nav-icon" aria-hidden="true">02</span
+          ><span
+            >Telephone &amp; callbacks<small
+              >Conversations &amp; follow-ups</small
+            ></span
+          >
+        </button>
+        <button id="tabAdmin" class="nav-item" hidden>
+          <span class="nav-icon" aria-hidden="true">03</span
+          ><span>Administration<small>Team &amp; access history</small></span>
+        </button>
+      </nav>
+      <div class="sidebar-note">
+        <span class="small-label">BUILT FOR YOUR FRONT DESK</span
+        ><strong>A warm welcome.<br />A clear record.</strong>
+        <p>People, conversations and every visit, in one place.</p>
+        <div class="accent-line"></div>
+      </div>
+      <div class="sidebar-footer">
+        <span class="mini-dot"></span> MMI Reception Workspace
+        <span class="version">v3</span>
+      </div>
+    </aside>
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="topbar-mark" aria-hidden="true">M</span>
+        <div>
+          <strong id="workspaceTitle">Reception workspace</strong
+          ><span>Mastermind Marketing International</span>
+        </div>
+      </div>
+      <div class="topbar-tools">
+        <div class="clock-block">
+          <span class="small-label">PAKISTAN STANDARD TIME</span
+          ><span id="clock"></span>
+        </div>
+        <button
+          type="button"
+          id="liveStatus"
+          class="liveStatus checking"
+          title="Click to check database connection"
+          aria-live="polite"
+          hidden
+        >
+          <span class="liveDot"></span
+          ><span id="liveLabel">CHECKING</span></button
+        ><button id="logout" class="quiet-button" hidden>
+          Sign out <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section id="auth" class="auth-layout" hidden>
+        <div class="auth-story">
+          <span class="auth-kicker">MMI · RECEPTION WORKSPACE</span>
+          <div class="auth-orbit" aria-hidden="true">
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring two"></div>
+            <span class="orbit-core">MMI</span
+            ><span class="orbit-label label-one">EVERY VISIT</span
+            ><span class="orbit-label label-two">EVERY CONVERSATION</span
+            ><span class="orbit-point point-one"></span
+            ><span class="orbit-point point-two"></span>
+          </div>
+          <h1>A better welcome<br />starts here.</h1>
+          <p>
+            A considered workspace for your reception team.<br />Keep the
+            details. Focus on the people.
+          </p>
+          <div class="auth-story-footer">
+            MASTERMIND MARKETING INTERNATIONAL <span>EST. FOR CONNECTION</span>
+          </div>
+        </div>
+        <div class="auth-form-wrap">
+          <span class="eyebrow">YOUR OFFICE. CONNECTED.</span>
+          <h2 id="authTitle">Welcome back</h2>
+          <p id="authHelp">Sign in with your office account to continue.</p>
+          <form id="authForm">
+            <label for="username"
+              >Login ID<input
+                id="username"
+                required
+                autocomplete="username"
+                minlength="3"
+                maxlength="40"
+                placeholder="Your office login ID"
+                autocapitalize="none"
+                spellcheck="false" /></label
+            ><label id="oldPasswordLabel" hidden
+              >Previous office password <small>For existing MMI upgrades</small
+              ><input
+                id="oldPassword"
+                type="password"
+                autocomplete="off" /></label
+            ><label id="setupKeyLabel" hidden
+              >One-time installation key<input
+                id="setupKey"
+                type="password"
+                autocomplete="off"
+                placeholder="From your private config.php" /></label
+            ><label for="password"
+              >Password
+              <div class="password-field">
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  minlength="10"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                /><button
+                  id="togglePassword"
+                  type="button"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+              </div></label
+            ><button id="authSubmit" class="primary full-width">
+              Continue to workspace <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p class="auth-footnote">
+            <span class="shield-mark" aria-hidden="true">✓</span> Your office
+            account is managed by your administrator.
+          </p>
+        </div>
+      </section>
+      <div id="workspace" hidden>
+        <div class="session-row">
+          <div class="session-person">
+            <span id="userAvatar" class="avatar">M</span>
+            <div>
+              <strong id="userDisplay">Office team</strong
+              ><span id="userRoleDisplay">Reception workspace</span>
+            </div>
+          </div>
+          <details class="session-details">
+            <summary>Session details <span aria-hidden="true">⌄</span></summary>
+            <div id="identity"></div>
+          </details>
+        </div>
+        <div id="saveStatus" class="hint save-banner" role="status">
+          Ready when you are. Saved records are confirmed here.
+        </div>
+        <section id="visitorPage" aria-label="Visitor desk">
+          <div class="intro">
+            <div>
+              <span class="eyebrow">PEOPLE &amp; CONNECTIONS</span>
+              <h1>Visitor desk<span class="heading-dot">.</span></h1>
+              <p>A seamless arrival. A complete visit history.</p>
+            </div>
+            <button id="focusVisitor" class="primary">
+              <span aria-hidden="true">+</span> Register a visitor
+            </button>
+          </div>
+          <div class="stats">
+            <div class="stat-card">
+              <div>
+                <span class="stat-label">VISITS TODAY</span><b id="today">0</b
+                ><span class="stat-description"
+                  >Welcomes at your front desk</span
+                >
+              </div>
+              <span class="stat-icon" aria-hidden="true">↗</span>
+            </div>
+            <div class="stat-card">
+              <div>
+                <span class="stat-label">VISITOR DIRECTORY</span
+                ><b id="people">0</b
+                ><span class="stat-description">People on record</span>
+              </div>
+              <span class="stat-icon gold" aria-hidden="true">◎</span>
+            </div>
+            <div class="stat-card">
+              <div>
+                <span class="stat-label">CURRENTLY INSIDE</span
+                ><b id="inside">0</b
+                ><span class="stat-description"
+                  >Open visits awaiting departure</span
+                >
+              </div>
+              <span class="stat-icon navy" aria-hidden="true">↳</span>
+            </div>
+          </div>
+          <div class="layout">
+            <section class="card entry-card">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">01 / ARRIVAL</span>
+                  <h2>Register a visit</h2>
+                </div>
+                <span class="card-mark" aria-hidden="true">↗</span>
+              </div>
+              <label for="lookup" class="lookup-label"
+                >Find a returning visitor<input
+                  id="lookup"
+                  placeholder="Search mobile, name or full CNIC"
+                  autocomplete="off"
+                  aria-controls="matches"
+              /></label>
+              <div
+                id="matches"
+                aria-label="Matching visitors"
+                aria-live="polite"
+              ></div>
+              <button
+                type="button"
+                id="moreMatches"
+                class="subtle-button"
+                hidden
+              >
+                Show more matches
+              </button>
+              <div id="selected" class="selection-note">
+                NEW VISITOR · Enter details below
+              </div>
+              <form id="visitForm">
+                <div class="form-section">
+                  <span class="form-caption">VISITOR DETAILS</span
+                  ><label for="mobile"
+                    >Mobile number <span class="required">*</span
+                    ><input
+                      id="mobile"
+                      placeholder="03XXXXXXXXX"
+                      required
+                      inputmode="tel"
+                      maxlength="18"
+                      autocomplete="off" /></label
+                  ><label for="name"
+                    >Full name <span class="required">*</span
+                    ><input
+                      id="name"
+                      placeholder="Visitor's full name"
+                      required
+                      minlength="2"
+                      maxlength="100"
+                      autocomplete="off" /></label
+                  ><label for="cnic"
+                    >CNIC number <span class="required">*</span
+                    ><input
+                      id="cnic"
+                      placeholder="XXXXX-XXXXXXX-X"
+                      required
+                      inputmode="numeric"
+                      maxlength="15"
+                      autocomplete="off"
+                  /></label>
+                </div>
+                <div class="form-section">
+                  <span class="form-caption">VISIT DETAILS</span
+                  ><label for="host"
+                    >Meeting with<input
+                      id="host"
+                      maxlength="150"
+                      placeholder="Person or department" /></label
+                  ><label for="purpose"
+                    >Purpose of visit<textarea
+                      id="purpose"
+                      placeholder="What brings them to the office?"
+                      maxlength="500"
+                      rows="2"
+                    ></textarea></label
+                  ><label for="remarks"
+                    >Remarks<textarea
+                      id="remarks"
+                      maxlength="4000"
+                      placeholder="Notes or follow-up details"
+                      rows="2"
+                    ></textarea>
+                  </label>
+                </div>
+                <label id="profileReasonLabel" hidden
+                  >Profile correction reason<input
+                    id="profileReason"
+                    maxlength="500"
+                    placeholder="Why is this identity being corrected?" /></label
+                ><button
+                  type="button"
+                  id="saveProfile"
+                  class="subtle-button"
+                  hidden
+                >
+                  Save identity correction
+                </button>
+                <div class="time-note">
+                  <span aria-hidden="true">◷</span> Arrival time is recorded
+                  automatically.
+                </div>
+                <div class="form-actions">
+                  <button id="save" class="primary">
+                    IN · Save arrival <span aria-hidden="true">→</span></button
+                  ><button type="button" id="clear" class="secondary">
+                    Clear
+                  </button>
+                </div>
+              </form>
+            </section>
+            <section class="card history">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">02 / RECORDS</span>
+                  <h2>Visit history</h2>
+                </div>
+                <button
+                  id="refreshVisitors"
+                  class="icon-button"
+                  title="Refresh visitor records"
+                  aria-label="Refresh visitor records"
+                >
+                  ↻
+                </button>
+              </div>
+              <div class="record-toolbar">
+                <a
+                  id="printHistory"
+                  class="toolbar-link"
+                  href="/api/print"
+                  target="_blank"
+                  rel="noopener"
+                  >Print / PDF <span aria-hidden="true">↗</span></a
+                ><a id="export" class="toolbar-link" href="/api/export"
+                  >Export CSV</a
+                >
+                <details class="backup-menu" id="backupMenu">
+                  <summary>Backups <span aria-hidden="true">⌄</span></summary>
+                  <div>
+                    <a id="allBackup" href="/api/backup">All records · Excel</a
+                    ><a id="restoreBackup" href="/api/database-backup"
+                      >Restore copy · MySQL SQL</a
+                    >
+                  </div>
+                </details>
+              </div>
+              <div class="filters">
+                <label class="sr-only" for="filter"
+                  >Find saved visitor records</label
+                ><input
+                  id="filter"
+                  placeholder="Find by number, name or CNIC"
+                /><label class="sr-only" for="date">Filter by visit date</label
+                ><input id="date" type="date" /><button
+                  id="resetFilter"
+                  class="secondary"
+                >
+                  Reset
+                </button>
+              </div>
+              <div id="historyNotice" class="hint" hidden></div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Visitor</th>
+                      <th>Contact / CNIC</th>
+                      <th>Visit timeline</th>
+                      <th>Meeting &amp; notes</th>
+                      <th>Actions / team</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rows"></tbody>
+                </table>
+              </div>
+              <div class="row pages">
+                <button id="prev" class="secondary">← Previous</button
+                ><span id="pageLabel"></span
+                ><button id="next" class="secondary">Next →</button>
+              </div>
+            </section>
+          </div>
+        </section>
+        <section id="callPage" aria-label="Telephone and callbacks" hidden>
+          <div class="intro">
+            <div>
+              <span class="eyebrow">CONVERSATIONS THAT MATTER</span>
+              <h1>
+                Telephone &amp; callbacks<span class="heading-dot">.</span>
+              </h1>
+              <p>Keep every conversation clear, connected and accountable.</p>
+            </div>
+            <button id="focusCall" class="primary">
+              <span aria-hidden="true">+</span> Record a call
+            </button>
+          </div>
+          <div class="call-overview">
+            <div>
+              <span class="small-label">YOUR CALL WORKFLOW</span
+              ><strong>Start. Listen. Record.</strong>
+            </div>
+            <p>
+              Use the timer for live calls, or enter the time and duration of an
+              earlier conversation.
+            </p>
+            <span class="workflow-arrow" aria-hidden="true">↗</span>
+          </div>
+          <div class="layout">
+            <section class="card entry-card">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">01 / CONVERSATION</span>
+                  <h2>Call details</h2>
+                </div>
+                <span class="card-mark" aria-hidden="true">↗</span>
+              </div>
+              <form id="callForm">
+                <label for="callKind"
+                  >Call type<select id="callKind">
+                    <option>Incoming</option>
+                    <option>Outgoing</option>
+                    <option>Callback</option>
+                  </select></label
+                ><label for="callPhone"
+                  >Phone number <span class="required">*</span
+                  ><input
+                    id="callPhone"
+                    required
+                    inputmode="tel"
+                    maxlength="22"
+                    placeholder="Mobile or landline"
+                    autocomplete="off"
+                    aria-controls="callMatches"
+                /></label>
+                <div
+                  id="callMatches"
+                  aria-label="Matching callers"
+                  aria-live="polite"
+                ></div>
+                <button type="button" id="moreCallMatches" hidden>
+                  Show more callers</button
+                ><label for="callCaller"
+                  >Caller name<input
+                    id="callCaller"
+                    maxlength="100"
+                    placeholder="Name or organisation" /></label
+                ><label for="callAt"
+                  >Call start time <small>Pakistan time</small
+                  ><input id="callAt" type="datetime-local" step="1" required
+                /></label>
+                <div class="timer-panel">
+                  <span class="small-label">LIVE CALL TIMER</span
+                  ><b id="callTimer">00:00</b>
+                  <div>
+                    <button type="button" id="startCall" class="timer-start">
+                      Start call</button
+                    ><button type="button" id="endCall" class="timer-end">
+                      End call
+                    </button>
+                  </div>
+                </div>
+                <div class="field-pair">
+                  <label for="callDuration"
+                    >Duration <small>seconds</small
+                    ><input
+                      id="callDuration"
+                      type="number"
+                      min="0"
+                      max="604800"
+                      value="0"
+                      required /></label
+                  ><label for="callStaff"
+                    >Handled by <span class="required">*</span
+                    ><input
+                      id="callStaff"
+                      required
+                      maxlength="100"
+                      placeholder="Staff name"
+                  /></label>
+                </div>
+                <label for="callRemarks"
+                  >Discussion / remarks<textarea
+                    id="callRemarks"
+                    maxlength="4000"
+                    placeholder="What was discussed? What happens next?"
+                    rows="4"
+                  ></textarea></label
+                ><label id="callReasonLabel" hidden
+                  >Correction reason<input
+                    id="callReason"
+                    maxlength="500"
+                    placeholder="Why is this record being updated?"
+                /></label>
+                <div class="form-actions">
+                  <button id="callSave" class="primary">
+                    Save call record <span aria-hidden="true">→</span></button
+                  ><button type="button" id="clearCall" class="secondary">
+                    Clear
+                  </button>
+                </div>
+                <p class="field-help">
+                  Timer and manual entry are available. Telephone-line detection
+                  is not connected.
+                </p>
+              </form>
+            </section>
+            <section class="card history">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">02 / RECORDS</span>
+                  <h2>Call history</h2>
+                </div>
+                <button
+                  id="refreshCalls"
+                  class="icon-button"
+                  title="Refresh call records"
+                  aria-label="Refresh call records"
+                >
+                  ↻
+                </button>
+              </div>
+              <div class="record-toolbar">
+                <a
+                  id="printCalls"
+                  class="toolbar-link"
+                  href="/api/call-print"
+                  target="_blank"
+                  rel="noopener"
+                  >Print / PDF ↗</a
+                ><button id="exportCalls" class="toolbar-link">
+                  Export CSV</button
+                ><label class="sr-only" for="callSearch"
+                  >Search saved calls</label
+                ><input
+                  id="callSearch"
+                  placeholder="Find number, caller, staff or remarks"
+                /><label class="sr-only" for="callDate"
+                  >Filter calls by date</label
+                ><input
+                  id="callDate"
+                  type="date"
+                  aria-label="Filter calls by date"
+                /><button id="resetCalls" class="secondary">Reset</button>
+              </div>
+              <div class="tableWrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Caller / number</th>
+                      <th>Time / duration</th>
+                      <th>Handled by</th>
+                      <th>Discussion</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="callRows"></tbody>
+                </table>
+              </div>
+              <div class="row pages">
+                <button id="callPrev" class="secondary">← Previous</button
+                ><span id="callPageLabel"></span
+                ><button id="callNext" class="secondary">Next →</button>
+              </div>
+            </section>
+          </div>
+        </section>
+        <section id="adminPage" aria-label="Administration" hidden>
+          <div class="intro">
+            <div>
+              <span class="eyebrow">YOUR TEAM. THE RIGHT ACCESS.</span>
+              <h1>Administration<span class="heading-dot">.</span></h1>
+              <p>
+                Manage office accounts and review the history behind your
+                records.
+              </p>
+            </div>
+            <a class="secondary button-link" href="/api/history-backup"
+              >Download history · Excel ↗</a
+            >
+          </div>
+          <div class="layout">
+            <section class="card entry-card">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">01 / ACCESS</span>
+                  <h2>Team account</h2>
+                </div>
+              </div>
+              <p class="field-help">
+                Create a new account, or select a team member to update their
+                access.
+              </p>
+              <form id="userForm">
+                <label for="userId"
+                  >Login ID <span class="required">*</span
+                  ><input
+                    id="userId"
+                    required
+                    minlength="3"
+                    maxlength="40"
+                    placeholder="e.g. reception.desk"
+                    autocomplete="off"
+                    autocapitalize="none" /></label
+                ><label for="userName"
+                  >Staff name <span class="required">*</span
+                  ><input
+                    id="userName"
+                    required
+                    maxlength="100"
+                    placeholder="Team member's name" /></label
+                ><label for="userRole"
+                  >Role<select id="userRole">
+                    <option value="receptionist">Receptionist</option>
+                    <option value="admin">Administrator</option>
+                  </select></label
+                ><label for="userPassword"
+                  >Password <small>10+ characters</small
+                  ><input
+                    id="userPassword"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Leave blank to keep existing" /></label
+                ><label for="userActive"
+                  >Account status<select id="userActive">
+                    <option value="1">Active</option>
+                    <option value="0">Disabled</option>
+                  </select></label
+                >
+                <div class="form-actions">
+                  <button id="userSave" class="primary">Save account →</button
+                  ><button type="reset" class="secondary">Clear</button>
+                </div>
+              </form>
+            </section>
+            <section class="card">
+              <div class="card-heading">
+                <div>
+                  <span class="section-number">02 / TEAM</span>
+                  <h2>Office accounts</h2>
+                </div>
+              </div>
+              <div id="users"></div>
+              <div class="card-heading audit-heading">
+                <div>
+                  <span class="section-number">03 / ACCOUNTABILITY</span>
+                  <h2>Sign-in activity</h2>
+                </div>
+              </div>
+              <div id="audit"></div>
+            </section>
+          </div>
+        </section>
+        <section id="editPanel" class="card correction-panel" hidden>
+          <div class="card-heading">
+            <div>
+              <span class="section-number">RECORD CORRECTION</span>
+              <h2>Update saved visit</h2>
+            </div>
+          </div>
+          <p class="field-help">
+            Every correction keeps a before/after history. Original IN/OUT times
+            stay intact.
+          </p>
+          <form id="editVisitForm">
+            <label for="editHost"
+              >Meeting with<input id="editHost" maxlength="150" /></label
+            ><label for="editPurpose"
+              >Purpose<textarea
+                id="editPurpose"
+                maxlength="500"
+              ></textarea></label
+            ><label for="editRemarks"
+              >Remarks<textarea
+                id="editRemarks"
+                maxlength="4000"
+              ></textarea></label
+            ><label for="editReason"
+              >Reason for correction <span class="required">*</span
+              ><input id="editReason" required minlength="3" maxlength="500"
+            /></label>
+            <div class="form-actions">
+              <button class="primary">Save changes →</button
+              ><button id="cancelEdit" type="button" class="secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </section>
+        <section id="changePanel" class="card" hidden>
+          <div class="card-heading">
+            <div>
+              <span class="section-number">TRANSPARENT BY DESIGN</span>
+              <h2>Record change history</h2>
+            </div>
+            <button id="closeChanges" type="button" class="secondary">
+              Close
+            </button>
+          </div>
+          <div id="changeRows"></div>
+        </section>
+      </div>
+      <footer class="app-footer">
+        <span
+          >MMI <span class="footer-separator">/</span> Reception Workspace</span
+        ><span>Developed by <strong>mianmuhamamdtayyab</strong></span>
+      </footer>
+      <div id="message" role="status" hidden></div>
+    </main>
+    <script src="assets/app.js"></script>
+  </body>
+</html>

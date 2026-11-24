@@ -1,0 +1,49 @@
+MMI — FINAL DESIGN / WORKFLOW VALIDATION
+02 November 2026
+======================================
+THREE VERIFICATION ROUNDS
+1. Backend and asset checks: 21 Python tests passed. JavaScript syntax passed.
+2. Actual headless Chromium browser: desktop and mobile workflow checks passed;
+   sign-in, visitor desk, callback page, admin and mobile screenshots visually reviewed.
+3. Final ZIP extracted into a fresh directory: full 21-test suite, file integrity,
+   complete database/Excel saving and extracted-package browser workflow checked.
+
+FUNCTIONS CHECKED
+Admin/receptionist login, setup and account disabling. Login/logout history persists.
+Visitor 0 -> 03 -> 030 prefix search; number/name/CNIC matching and selection.
+Autofill includes previous visit host/purpose/remarks. IN/OUT and responsible staff saved.
+Profile corrections preserve historic identity snapshots. IN/OUT times are protected.
+Visit and call corrections retain actor, timestamp, reason and before/after changes.
+Stale-version edits cannot overwrite newer changes. Duplicate-submit retries are safe.
+Caller lookup uses both previous calls and visitor directory; +92 / 03 canonical match.
+Callback Start/End timer, manual times/duration, save/edit/search/date filter work.
+Call history covers the entire database, in pages of 30; no latest-500 search cutoff.
+Full filtered callback print/CSV verified on 505 records; visitor print is full-filtered.
+Both actual automatic Excel files exist and contain committed records.
+Independent XLSX reader verifies all-record and separate history workbooks.
+SQLite backup opens, integrity_check returns ok; records survive server process restart.
+An Excel-export failure does not lose the primary database entry.
+12 simultaneous identical submissions create one visit, not 12.
+Complete backup/history/account endpoints are admin-only; hostile host/origin rejected.
+Print output escapes names/remarks; database file routes are not served.
+Append-only database triggers protect change history through normal app operations.
+Actual Waitress website adapter checked in earlier deployment test.
+
+VISUAL / INTERACTION CHECKS
+Professional navy, emerald and gold theme; responsive sidebar and branded sign-in.
+Consistent visitor/callback pages; modern buttons, empty states and save feedback.
+Mobile width 390 px: no body overflow. Tables scroll within their own panels.
+Keyboard focus, labelled fields, reduced-motion support and password visibility control.
+LIVE indicator visible on all signed-in pages; confirmed database saves displayed.
+Required footer and printed reports: Developed by mianmuhamamdtayyab
+No frontend JavaScript errors during the real-browser workflow.
+
+IMPORTANT SCOPE
+Tests use isolated synthetic records; your office data/computer and domain were not
+accessible. Browser QA uses headless Linux Chromium, not a physical Windows machine.
+Actual Windows biometric/telephone devices or physical printers were not tested.
+No telephony/PBX integration. Website hosting guide included, no live deployment made.
+SQLite/Excel are not file-encrypted. Server/OS administrators can read files.
+No claim of universal zero bugs or impossible data theft. Deployment access matters.
+Explicit Sign out records exact logout; power/browser close retain last activity and
+end reason without inventing an exact logout time. Local/hosted copies do not auto-sync.

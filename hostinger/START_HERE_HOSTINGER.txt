@@ -1,0 +1,64 @@
+MMI — HOSTINGER BUSINESS WEB HOSTING VERSION
+PHP + MySQL / MariaDB
+============================================
+Yeh naya hosting version hai. Is ko Python ya VPS ki zaroorat nahi.
+Desktop wali ZIP se alag package hai. Aapki hosting par files upload aur database
+credentials configure karne ke baad chalega. Hosting access is package mein nahi hai.
+
+PEHLE YE 5 KAAM KAREIN
+1. Hostinger hPanel -> Websites -> apni website -> Dashboard.
+   PHP Configuration mein PHP 8.3 ya 8.4 select karein. Extensions pdo_mysql,
+   mbstring aur zip enabled hon. Website ka SSL / Force HTTPS enable karein.
+2. Databases -> Management mein ek NAYA, dedicated MySQL database aur user banayein.
+   Database name, username, password note karein. Existing WordPress database use na karein.
+3. File Manager mein hosting ke ALL FILES/root view kholein, sirf public_html nahi.
+   ZIP ke public_html/mmi folder ko apni hosting ke public_html/mmi mein upload karein.
+   ZIP ka mmi_private folder public_html ke BAHAR, uske barabar level par upload karein.
+4. mmi_private/config.example.php ki copy banakar config.php naam dein.
+   Usmein DB name, DB user, DB password aur app_url fill karein.
+   app_url example: https://yourdomain.com/mmi
+   install_key mein apna naya random 24+ character secret set karein.
+   allow_http ko false hi rakhein. Apni keys/password chat mein share na karein.
+5. Browser mein https://yourdomain.com/mmi/install.php kholein.
+   Sab checks Ready hon to Open MMI par click karein. First admin ID/password aur
+   private config wali installation key enter karein. Phir Administration se staff IDs banayein.
+
+FOLDER ARRANGEMENT — ROOT KE ANDAR
+  public_html/
+    mmi/
+      index.html
+      api.php
+      install.php
+      .htaccess
+      assets/
+  mmi_private/
+    config.php  (aap banayenge; real credentials wali file ZIP mein nahi)
+    config.example.php
+    core.php, records.php, views.php, exports.php
+    schema.sql
+    backups/
+
+SIRF mmi_private KO public_html/mmi KE ANDAR MAT RAKHEIN.
+Agar file manager sirf public_html dikhata hai, hosting root/all-files option use karein
+ya Hostinger support se outside-public_html private folder placement karwayein.
+Bina private config.php aur MySQL database ke app install nahi hogi.
+
+INSTALL KE BAAD
+Receptionist: https://yourdomain.com/mmi/ -> assigned login ID / password.
+Visitor data aur callbacks HOSTINGER DATABASE mein save honge; PC band hone se nahi mitenge.
+Mobile/office computers sab isi URL ko use karein to same database milega.
+Excel files automatically hosting ke mmi_private/backups folder mein update hoti hain:
+  MMI_All_Records.xlsx
+  MMI_Login_Change_History.xlsx
+Admin unhein app se download kar sakta hai. Restore backup ab MySQL .sql hai, SQLite nahi.
+Staff IN/OUT, number matching, profile/visit/call edits, full history, print aur CSV use karega.
+Website account passwords PHP password_hash se hash hote hain; config credentials private rahte hain.
+Sessions/login history MySQL mein persistent hain; exact logout Sign out par record hota hai.
+Browser close/power failure par exact logout unknown, last activity/end reason preserved.
+
+AGAR PURANA PC DATA HAI
+tools/export_desktop_records.py se stopped/backed-up mmi.sqlite3 ko MySQL SQL mein export
+kar sakte hain. Purani file seedha public_html mein upload na karein.
+Details README_HOSTINGER.txt mein hain. Fresh empty website database par hi import karein.
+
+Developed by mianmuhamamdtayyab

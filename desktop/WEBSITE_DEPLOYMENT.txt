@@ -1,0 +1,62 @@
+MMI WEBSITE DEPLOYMENT — FOR YOUR HOSTING DEVELOPER
+================================================
+This is a Python application, not a static HTML upload. A Python-capable VPS/server
+or compatible app platform with persistent disk is required. PHP-only/static hosting
+cannot run it. This package has not been deployed to your domain.
+
+REFERENCE LINUX LAYOUT
+/opt/mmi/                 program files (app.py, static, start_site.py, mmi_wsgi.py...)
+/var/lib/mmi/             private persistent data (not the public web root)
+Use an unprivileged OS user mmi with only required directory permissions.
+
+1. Create a virtual environment for Python 3.10+ and install requirements-site.txt.
+   python3 -m venv /opt/mmi/.venv
+   /opt/mmi/.venv/bin/pip install -r /opt/mmi/requirements-site.txt
+   Deployment operator should use the current supported patched Waitress release
+   within the specified major version and review release/security notes.
+
+2. Set MMI_DATA_DIR=/var/lib/mmi. Initialize the admin on the server locally:
+   run app.py as user mmi and open http://127.0.0.1:8765 locally or over an SSH tunnel.
+   Create admin account, then STOP the local app. For migration, copy an existing
+   stopped/consistent data directory instead. Do not run two app copies over this DB.
+
+3. Configure domain DNS. Set MMI_PUBLIC_ORIGIN=https://mmi.yourdomain.com, no path.
+   Run /opt/mmi/.venv/bin/python /opt/mmi/start_site.py as user mmi.
+   start_site.py validates config/admin, sets allowed hostname, disables first-admin
+   bootstrap, enables Secure cookies and HSTS, and binds Waitress to loopback 8765.
+   A SINGLE application process with multiple threads is intended. In-memory sessions
+   and rate counters are not shared across workers; do not scale multiple workers.
+
+4. Put Caddy or equivalent HTTPS reverse proxy in front. A same-machine Caddy example
+   is deploy/Caddyfile.example: replace domain. Backend port 8765 must NOT be public.
+   Only the same-machine 127.0.0.1 proxy is trusted for forwarded client/protocol headers.
+   Never trust arbitrary public proxy headers. If proxy topology differs, configure
+   trusted proxy explicitly in start_site.py after checking your actual infrastructure.
+   Origin must exactly match MMI_PUBLIC_ORIGIN; request Host must match its hostname.
+
+5. Use a process supervisor; deploy/mmi.service.example is a systemd starting template.
+   Replace paths/domain and create the mmi OS user/directories before enabling it.
+   These files are examples, not installed server configuration.
+
+6. Open the HTTPS domain, sign in, create receptionist login, and test IN/OUT, one-digit
+   search, editing, print, separate history Excel, logout/relogin, backup and restore.
+   Check mobile and office PCs access the SAME domain/backend. They will see the same
+   saved data on search/reload; this is request-based access, not a WebSocket live feed.
+   The desktop launcher is a separate local database unless clients instead open the
+   hosted URL in their browser. Existing local/hosted databases do not auto-merge.
+
+7. Daily consistent SQLite backup and encrypted off-site storage are the hosting
+   operator's responsibility. Encrypt host disk; secure SSH/admin access and updates.
+   Do not publish data/, backups/, environment settings or the SQLite file.
+   App only serves explicit UI files and authenticated API routes.
+   A server filesystem administrator can bypass application-level protections.
+
+LOGIN LOG MEANING
+Sign out gives exact logout time. Browser close/crash does not. Last API activity and
+expiry/restart reason remain recorded so unknown time is never represented as exact.
+Session history, visits, call records and changes persist on disk across restarts.
+
+OFFICIAL SERVER CONFIGURATION REFERENCES
+https://docs.pylonsproject.org/projects/waitress/en/latest/runner.html
+https://docs.pylonsproject.org/projects/waitress/en/latest/reverse-proxy.html
+https://docs.pylonsproject.org/projects/waitress/en/latest/arguments.html

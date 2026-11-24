@@ -1,0 +1,21 @@
+MMI — START HERE
+================
+1. Extract the ZIP to a permanent folder on your computer.
+2. Install Python 3.10 or newer; enable Add Python to PATH.
+3. Double-click START_MMI.bat. Your browser opens MMI.
+4. Create your administrator login, then create receptionist accounts.
+5. Keep the program console window open while using MMI.
+
+Browser address: http://127.0.0.1:8765
+Full guide: README.txt
+Website hosting: WEBSITE_DEPLOYMENT.txt
+Validation: CHECK_RESULTS.txt
+
+UPDATING? Stop old MMI. Back up and preserve your entire old data folder.
+Use the new program/static files with that existing data folder.
+Do not replace your existing data folder with an empty one.
+
+Data: data/mmi.sqlite3
+Automatic Excel reports: data/backups/
+
+Developed by mianmuhamamdtayyab
